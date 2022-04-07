@@ -1,0 +1,56 @@
+lego container = '//*[@class ="ProductGridstyles__Item-lc2zkx-1 bDqwSC"]'
+
+
+def look_for_search_bar(self):
+
+
+        time.sleep(2)
+        xpath = '//*[@id="root"]/div[2]/header/div[2]/div[2]/div/div[5]/div/button'
+        try:
+            #//*[@id="root"]/div[2]/header/div[2]/div[2]/div/div[5]/div/button/svg
+            self.driver.find_element(By.XPATH, xpath).click()
+        except TimeoutException:
+            print('No search bar found')
+            return None
+
+    
+    def send_keys_to_search_bar(self):
+        xpath1 = '//*[@id="desktop-search-search-input"]'
+        self.driver.find_element(By.XPATH, xpath1).send_keys("Lego Car Technics")
+        self.driver.find_element(By.XPATH, xpath1).send_keys(Keys.ENTER)
+
+    def select_Rating(self):
+        xpath = '//*[@id="product-facet-ratings-accordion-title"]/div'
+        xpath1 = '//*[@id="product-facet-ratings-accordion-content"]/div/div/ul/li[1]/label'
+        #//*[@id="product-facet-ratings-accordion-content"]/div/div/ul/li[1]/label/span/span
+        xpath2 = '//*[@id="product-facet-ratings-accordion-content"]/div/div/ul/li[2]/label/div/div/svg'
+        #//*[@id="product-facet-ratings-accordion-content"]/div/div/ul/li[2]/label/span/span
+        try:
+            #time.sleep(2)
+            WebDriverWait(self.driver,10).until(EC.presence_of_element_located((By.XPATH, xpath)))
+            self.driver.find_element(By.XPATH,xpath).click()
+            self.driver.find_element(By.XPATH,xpath1).click()
+            self.driver.find_element(By.XPATH,xpath2).click()
+        except TimeoutException:
+            print('no elements found in xpath')
+
+
+def lego_popup(self,xpath: str = '//div[@class = AgeGatestyles__Container-xudtvj-1 iorSEb'):
+
+
+        try:
+
+            time.sleep(10)
+            self.driver.switch_to.frame('AgeGatestyles__Container-xudtvj-1 iorSEb')
+            WebDriverWait(self.driver,10).until(EC.presence_of_element_located((By.XPATH, xpath)))
+            self.driver.find_element(By.XPATH, xpath).click()
+        except TimeoutException:
+            print('no elements found')
+
+    def lego_continue(self, xpath : str = '//div[@class = AgeGatestyles__StyledText-xudtvj-11 eLvrYKButton__Base-sc-1jdmsyi-0 eLFkVi AgeGatestyles__StyledButton-xudtvj-12 hycfPw@]'):
+        try:
+        
+            WebDriverWait(self.driver,10).until(EC.presence_of_element_located((By.XPATH, xpath)))
+            self.driver.find_element(By.XPATH, xpath).click()
+        except TimeoutException:
+            print('No butons found')
