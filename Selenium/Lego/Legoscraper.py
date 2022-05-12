@@ -27,10 +27,9 @@ class UUIDEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 class Scraper():
-    #Themes = 'Minions','Technics','DUPLO'
-    #print('Themes')
+    """This class is to scarpe the Lego Website"""
 
-    def __init__(self, selected_theme, url:str = 'https://www.lego.com/en-gb'):
+    def __init__(self, url:str = 'https://www.lego.com/en-gb'):
         """ Initailising the theme"""
         #self.selected_theme = selected_theme
         self.selected_theme = selected_theme
@@ -126,6 +125,7 @@ class Scraper():
             self.driver.find_element(By.XPATH,xpath).click()
         except TimeoutException:
             print('no elements found')
+
     
 
     #def container(self):
@@ -155,7 +155,7 @@ class Scraper():
         self.lego_links = []
         for legoitems_link in self.list_items[0:]:
             self.lego_links.append(legoitems_link.find_element(By.TAG_NAME,'a').get_attribute('href'))
-        return self.lego_links
+        return print(self.lego_links)
     
     def lego_product_info(self):
         """Click each lego product link and get the Product name , link, prices.
@@ -179,7 +179,7 @@ class Scraper():
                 self.Lego_dict['Product_name'].append('N/A')
     #bot.driver.find_element(By.XPATH,'//span[@data-test="product-price"]')
             try:
-                self.Lego_dict['UUID'].append(uuid.uuid4())
+                self.Lego_dict['UUID'].append(str(uuid.uuid4()))
                 #print('UUID is',uuid.uuid4())
             except:
                 pass
@@ -215,7 +215,7 @@ class Scraper():
                         print('No images found')
 
                 try:
-                    self.Image_dict['Image_UUID'].append(uuid.uuid4())
+                    self.Image_dict['Image_UUID'].append(str(uuid.uuid4()))
                     print('UUID is',uuid.uuid4())
                 except:
                         pass
@@ -236,7 +236,7 @@ class Scraper():
         #I = json.dump(Image_dict)
         #Lego_dict = MyEncoder.encode(Lego_dict)
         with open('data.json', 'w') as f:
-            f.write(json.dumps(self.Lego_dict,cls = UUIDEncoder,indent=4, sort_keys=True))
+            f.write(json.dumps(self.Lego_dict,indent=4, sort_keys=True))
             #f.write('\\n')
             #f.write(json.dumps(self.Image_dict,cls = UUIDEncoder))
             #f.write(I)
