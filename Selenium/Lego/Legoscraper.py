@@ -1,3 +1,4 @@
+from crypt import methods
 import time
 import pandas as pd
 from pandas import DataFrame
@@ -25,10 +26,8 @@ class Scraper():
     """This class is to scarpe the Lego Website"""
 
     def __init__(self, url:str = 'https://www.lego.com/en-gb')-> None:
-        """ Initailising the theme"""
-        #self.selected_theme = selected_theme
-        #self.selected_theme = selected_theme
-        #input('Choose a Theme name(Minions,Technics,DUPLO): ')
+
+        """ Initailising the Lego Website address"""
         self.driver = Chrome(ChromeDriverManager().install())
         self.driver.get(url)
         self.driver.maximize_window()
@@ -278,7 +277,6 @@ class Scraper():
                     print('UUID is',uuid.uuid4())
                 except:
                         pass
-
     def Data_list(self):
         """Create a data table using panda for product info"""
         return(print(pd.DataFrame(self.Lego_dict)))
@@ -323,7 +321,7 @@ class Scraper():
             
         finally: 
             self.quit()
-            
+
     def _set_by_price(self)-> None:
         """This method is used to click Theme menu"""
         xpath = '//*[@id="blte6fb96bc03e90791_submenubutton"]/div/span'
@@ -372,4 +370,5 @@ class Scraper():
             return self.lego_product_links()
 
 if __name__ == '__main__' : 
-    bot = Scraper('Minions')  
+    bot = Scraper()
+    bot.scrape_now() 
