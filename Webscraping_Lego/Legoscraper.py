@@ -131,7 +131,7 @@ class Scraper():
         #self.lego_links 
         self.Lego_dict = {
             'Product_name':[],'Rating':[],'Prices':[],
-            'link':[],'Flag':[],'Pieces':[],'Availability':[],
+            'link':[],'Flag':[],'Pieces':[],'Availability':[],'Discount_Price':[],
             'Item_num':[],'UUID':[]}
         
         for link in self.lego_links[0::]:
